@@ -16,7 +16,7 @@
  * 6. Copie l'URL /exec générée dans .env (GOOGLE_APPS_SCRIPT_URL).
  */
 
-const VERSION = "v3-gid";        // pour vérifier quelle version est EN LIGNE (voir doGet)
+const VERSION = "v4-headers";    // pour vérifier quelle version est EN LIGNE (voir doGet)
 const SHEET_GID = 757105628;     // gid de l'onglet (dans l'URL #gid=...) — fiable
 const TAB_NAME = "Histo_Saisies"; // repli si le gid ne correspond pas
 const TOKEN = ""; // mets la même valeur que GOOGLE_APPS_SCRIPT_TOKEN (ou laisse vide)
@@ -46,15 +46,26 @@ function doPost(e) {
       });
     }
 
-    // Ordre des colonnes : Date | Index_m3 | Conso_L | Cout_EUR | Mode_Vacances
-    sheet.appendRow([
-      "'" + body.date,            // apostrophe = force le format texte (JJ-MM-AAAA)
-      Number(body.indexM3),
-      Number(body.consoL),
-      Number(body.coutEur),
-      body.vacances ? "TRUE" : "FALSE",
-    ]);
+    // Valeur à écrire pour chaque nom de colonne (insensible à l'ordre / aux colonnes en plus).
+    const valueByHeader = {
+      "Date": "'" + body.date,        // apostrophe = force le format texte (JJ-MM-AAAA)
+      "Index_m3": Number(body.indexM3),
+      "Conso_L": Number(body.consoL),
+      "Cout_EUR": Number(body.coutEur),
+      "Mode_Vacances": body.vacances ? "TRUE" : "FALSE",
+      "Arrosage": body.arrosage ? "TRUE" : "FALSE",
+      "Piscine": body.piscine ? "TRUE" : "FALSE",
+    };
 
+    // On lit la ligne d'en-tête et on place chaque valeur sous la bonne colonne.
+    const lastCol = sheet.getLastColumn();
+    const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+    const newRow = headers.map(function (h) {
+      const key = String(h).trim();
+      return valueByHeader.hasOwnProperty(key) ? valueByHeader[key] : "";
+    });
+
+    sheet.appendRow(newRow);
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });

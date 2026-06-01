@@ -12,6 +12,10 @@ export interface Reading {
   coutEur: number;
   /** Mode vacances actif lors de la saisie. */
   vacances: boolean;
+  /** Jour où le jardin a été arrosé. */
+  arrosage: boolean;
+  /** Jour où la piscine a été remplie. */
+  piscine: boolean;
 }
 
 /** Granularité du graphique. */
@@ -25,6 +29,10 @@ export interface ChartPoint {
   consoL: number;
   /** Coût total en euros sur la période. */
   coutEur: number;
+  /** Jour avec arrosage (vue journalière uniquement). */
+  arrosage?: boolean;
+  /** Jour avec remplissage piscine (vue journalière uniquement). */
+  piscine?: boolean;
 }
 
 /** Données calculées pour les cartes KPI. */

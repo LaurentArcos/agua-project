@@ -98,6 +98,8 @@ export async function getAllReadings(): Promise<Reading[]> {
         consoL: parseFrNumber(at(cells, "Conso_L")?.v),
         coutEur: parseFrNumber(at(cells, "Cout_EUR")?.v),
         vacances: parseBool(at(cells, "Mode_Vacances")?.v),
+        arrosage: parseBool(at(cells, "Arrosage")?.v),
+        piscine: parseBool(at(cells, "Piscine")?.v),
       };
     })
     .filter((r): r is Reading => r !== null);
@@ -119,6 +121,8 @@ export async function appendReading(row: {
   consoL: number;
   coutEur: number;
   vacances: boolean;
+  arrosage: boolean;
+  piscine: boolean;
 }): Promise<void> {
   const res = await fetch(config.appsScriptUrl(), {
     method: "POST",

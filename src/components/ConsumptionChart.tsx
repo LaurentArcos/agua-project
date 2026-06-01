@@ -6,6 +6,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -110,6 +111,34 @@ export default function ConsumptionChart({ readings, thresholds }: Props) {
                 {data.map((d, i) => (
                   <Cell key={i} fill={barColor(period, d.consoL, thresholds)} />
                 ))}
+                {period === "day" && (
+                  <LabelList
+                    dataKey="consoL"
+                    content={(p) => {
+                      const idx = Number(
+                        (p as { index?: number }).index ?? 0
+                      );
+                      const d = data[idx];
+                      const marks = `${d?.arrosage ? "🌿" : ""}${
+                        d?.piscine ? "🏊" : ""
+                      }`;
+                      if (!marks) return null;
+                      const x = Number((p as { x?: number }).x ?? 0);
+                      const y = Number((p as { y?: number }).y ?? 0);
+                      const w = Number((p as { width?: number }).width ?? 0);
+                      return (
+                        <text
+                          x={x + w / 2}
+                          y={y - 6}
+                          textAnchor="middle"
+                          fontSize={13}
+                        >
+                          {marks}
+                        </text>
+                      );
+                    }}
+                  />
+                )}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -134,6 +163,8 @@ export default function ConsumptionChart({ readings, thresholds }: Props) {
               {l.t}
             </span>
           ))}
+          <span className="inline-flex items-center gap-1.5">🌿 arrosage</span>
+          <span className="inline-flex items-center gap-1.5">🏊 piscine</span>
         </div>
       )}
     </div>

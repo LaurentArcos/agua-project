@@ -25,6 +25,8 @@ interface DayPoint {
   isoDate: string;
   consoL: number;
   coutEur: number;
+  arrosage: boolean;
+  piscine: boolean;
 }
 
 /**
@@ -46,6 +48,8 @@ export function buildDailySeries(readings: Reading[]): DayPoint[] {
         isoDate: cur.isoDate,
         consoL: round(cur.consoL),
         coutEur: round(cur.coutEur, 2),
+        arrosage: cur.arrosage,
+        piscine: cur.piscine,
       });
       continue;
     }
@@ -56,10 +60,14 @@ export function buildDailySeries(readings: Reading[]): DayPoint[] {
     const perC = cur.coutEur / days;
 
     for (let d = 1; d <= days; d++) {
+      // Les marqueurs (arrosage/piscine) sont portés par le jour du relevé.
+      const isReadingDay = d === days;
       out.push({
         isoDate: addDaysIso(prev.isoDate, d),
         consoL: round(perL),
         coutEur: round(perC, 2),
+        arrosage: isReadingDay && cur.arrosage,
+        piscine: isReadingDay && cur.piscine,
       });
     }
   }
@@ -84,6 +92,8 @@ export function aggregate(readings: Reading[], period: Period): ChartPoint[] {
       label: `${p.isoDate.slice(8, 10)}/${p.isoDate.slice(5, 7)}`, // DD/MM
       consoL: p.consoL,
       coutEur: p.coutEur,
+      arrosage: p.arrosage,
+      piscine: p.piscine,
     }));
   }
 

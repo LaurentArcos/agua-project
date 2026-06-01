@@ -28,6 +28,16 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
     setMaxDate(t);
   }, []);
 
+  // Événements du jour (réinitialisés après une saisie réussie).
+  const [arrosage, setArrosage] = useState(false);
+  const [piscine, setPiscine] = useState(false);
+  useEffect(() => {
+    if (state.ok) {
+      setArrosage(false);
+      setPiscine(false);
+    }
+  }, [state.ok]);
+
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
@@ -68,12 +78,38 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
         </p>
       </div>
 
-      <div className="rounded-2xl bg-slate-50 px-4 py-3 ring-1 ring-slate-200">
+      <div className="flex flex-col gap-3 rounded-2xl bg-slate-50 px-4 py-3 ring-1 ring-slate-200">
         <VacationToggle
           name="vacances"
           checked={vacances}
           onChange={onVacancesChange}
         />
+
+        <label className="flex items-center gap-3 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            name="arrosage"
+            checked={arrosage}
+            onChange={(e) => setArrosage(e.target.checked)}
+            className="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
+          />
+          <span className="text-sm font-medium text-slate-700">
+            Arrosage du jardin 🌿
+          </span>
+        </label>
+
+        <label className="flex items-center gap-3 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            name="piscine"
+            checked={piscine}
+            onChange={(e) => setPiscine(e.target.checked)}
+            className="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
+          />
+          <span className="text-sm font-medium text-slate-700">
+            Remplissage piscine 🏊
+          </span>
+        </label>
       </div>
 
       <button

@@ -24,6 +24,8 @@ export async function addReadingAction(
   const rawIndex = String(formData.get("index") ?? "").replace(",", ".").trim();
   const rawDate = String(formData.get("date") ?? "").trim(); // ISO yyyy-mm-dd
   const vacances = formData.get("vacances") === "on";
+  const arrosage = formData.get("arrosage") === "on";
+  const piscine = formData.get("piscine") === "on";
 
   const indexM3 = Number(rawIndex);
   if (!rawIndex || !Number.isFinite(indexM3) || indexM3 < 0) {
@@ -71,6 +73,8 @@ export async function addReadingAction(
       consoL,
       coutEur,
       vacances,
+      arrosage,
+      piscine,
     });
 
     revalidatePath("/");
