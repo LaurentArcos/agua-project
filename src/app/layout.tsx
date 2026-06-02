@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Veolia — Suivi conso d'eau",
   description: "Suivi quotidien de la consommation d'eau",
+  // Permet l'installation en plein écran sur iOS (Ajouter à l'écran d'accueil).
+  appleWebApp: {
+    capable: true,
+    title: "Veolia",
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export const viewport: Viewport = {
