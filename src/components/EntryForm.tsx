@@ -54,7 +54,7 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
           required
           placeholder="0000.000"
           autoComplete="off"
-          className="w-full rounded-2xl border border-slate-300 bg-white px-5 py-5 text-center text-4xl font-bold tabular-nums text-slate-900 shadow-inner outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+          className="cursor-pointer w-full rounded-2xl border border-slate-300 bg-white px-5 py-5 text-center text-4xl font-bold tabular-nums text-slate-900 shadow-inner outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
         />
       </div>
 
@@ -70,7 +70,7 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
           max={maxDate || undefined}
           onChange={(e) => setDate(e.target.value)}
           required
-          className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
+          className="cursor-pointer w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-200"
         />
         <p className="text-xs text-slate-400">
           Oubli ? Choisis le jour réel du relevé : la conso sera répartie sur les
@@ -91,7 +91,7 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
             name="arrosage"
             checked={arrosage}
             onChange={(e) => setArrosage(e.target.checked)}
-            className="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
+            className="cursor-pointer h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
           />
           <span className="text-sm font-medium text-slate-700">
             Arrosage du jardin 🌿
@@ -104,7 +104,7 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
             name="piscine"
             checked={piscine}
             onChange={(e) => setPiscine(e.target.checked)}
-            className="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
+            className="cursor-pointer h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-300"
           />
           <span className="text-sm font-medium text-slate-700">
             Remplissage piscine 🏊
@@ -115,7 +115,7 @@ export default function EntryForm({ vacances, onVacancesChange }: Props) {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full rounded-2xl bg-sky-600 px-6 py-5 text-xl font-bold text-white shadow-lg transition-colors hover:bg-sky-700 active:bg-sky-800 disabled:cursor-not-allowed disabled:opacity-60"
+        className="cursor-pointer w-full rounded-2xl bg-sky-600 px-6 py-5 text-xl font-bold text-white shadow-lg transition-colors hover:bg-sky-700 active:bg-sky-800 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isPending ? "Enregistrement…" : "Enregistrer l'index"}
       </button>

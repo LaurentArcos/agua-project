@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agua — Suivi conso d'eau",
+  title: "Veolia — Suivi conso d'eau",
   description: "Suivi quotidien de la consommation d'eau",
 };
 

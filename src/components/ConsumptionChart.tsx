@@ -50,7 +50,7 @@ export default function ConsumptionChart({ readings, thresholds }: Props) {
               key={p.id}
               type="button"
               onClick={() => setPeriod(p.id)}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+              className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
                 period === p.id
                   ? "bg-white text-sky-700 shadow-sm"
                   : "text-slate-500 hover:text-slate-700"

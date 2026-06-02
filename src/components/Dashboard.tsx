@@ -22,7 +22,7 @@ export default function Dashboard({ readings, stats, thresholds }: Props) {
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-5 px-4 py-6">
       <header className="flex items-center gap-2">
         <span className="text-2xl">💧</span>
-        <h1 className="text-xl font-bold text-slate-900">Agua</h1>
+        <h1 className="text-xl font-bold text-slate-900">Veolia</h1>
         <span className="text-sm text-slate-400">— suivi conso d&apos;eau</span>
       </header>
 

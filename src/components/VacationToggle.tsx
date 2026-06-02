@@ -25,7 +25,7 @@ export default function VacationToggle({ checked, onChange, name }: Props) {
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors ${
+        className={`cursor-pointer relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors ${
           checked ? "bg-violet-500" : "bg-slate-300"
         }`}
       >
