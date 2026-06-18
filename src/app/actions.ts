@@ -93,10 +93,10 @@ export async function addReadingAction(
     return { ok: true, message, consoL };
   } catch (err) {
     console.error("[addReadingAction]", err);
+    const detail = err instanceof Error ? err.message : String(err);
     return {
       ok: false,
-      message:
-        "Erreur lors de l'écriture dans Google Sheets. Vérifie la config (.env) et le partage du Sheet.",
+      message: `Erreur lors de l'écriture dans Google Sheets : ${detail}`,
     };
   }
 }
