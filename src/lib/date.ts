@@ -52,3 +52,10 @@ export function addDaysIso(iso: string, n: number): string {
   const dd = String(d.getUTCDate()).padStart(2, "0");
   return `${d.getUTCFullYear()}-${mm}-${dd}`;
 }
+
+/** Renvoie le lundi (ISO 8601) de la semaine contenant la date ISO donnée. */
+export function mondayIso(iso: string): string {
+  const d = new Date(iso + "T00:00:00Z");
+  const day = d.getUTCDay() || 7; // dimanche = 7
+  return addDaysIso(iso, -(day - 1));
+}

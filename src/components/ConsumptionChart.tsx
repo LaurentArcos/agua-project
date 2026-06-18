@@ -38,7 +38,18 @@ function barColor(period: Period, litres: number, t: Thresholds): string {
 
 export default function ConsumptionChart({ readings, thresholds }: Props) {
   const [period, setPeriod] = useState<Period>("day");
-  const data = useMemo(() => aggregate(readings, period), [readings, period]);
+  // 0 = fenêtre la plus récente ; +1 à chaque pas vers le passé.
+  const [offset, setOffset] = useState(0);
+  const { points: data, title, canPrev, canNext } = useMemo(
+    () => aggregate(readings, period, offset),
+    [readings, period, offset]
+  );
+
+  // Change de granularité : on revient à la fenêtre la plus récente.
+  function changePeriod(p: Period) {
+    setPeriod(p);
+    setOffset(0);
+  }
 
   return (
     <div className="flex flex-col gap-3">
@@ -49,7 +60,7 @@ export default function ConsumptionChart({ readings, thresholds }: Props) {
             <button
               key={p.id}
               type="button"
-              onClick={() => setPeriod(p.id)}
+              onClick={() => changePeriod(p.id)}
               className={`cursor-pointer rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
                 period === p.id
                   ? "bg-white text-sky-700 shadow-sm"
@@ -60,6 +71,36 @@ export default function ConsumptionChart({ readings, thresholds }: Props) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <button
+          type="button"
+          aria-label="Période précédente"
+          onClick={() => canPrev && setOffset((o) => o + 1)}
+          disabled={!canPrev}
+          className={`flex h-8 w-8 items-center justify-center rounded-lg text-lg transition-colors ${
+            canPrev
+              ? "cursor-pointer text-slate-600 hover:bg-slate-100"
+              : "cursor-not-allowed text-slate-300"
+          }`}
+        >
+          ‹
+        </button>
+        <span className="text-sm font-medium text-slate-600">{title}</span>
+        <button
+          type="button"
+          aria-label="Période suivante"
+          onClick={() => canNext && setOffset((o) => Math.max(0, o - 1))}
+          disabled={!canNext}
+          className={`flex h-8 w-8 items-center justify-center rounded-lg text-lg transition-colors ${
+            canNext
+              ? "cursor-pointer text-slate-600 hover:bg-slate-100"
+              : "cursor-not-allowed text-slate-300"
+          }`}
+        >
+          ›
+        </button>
       </div>
 
       {data.length === 0 ? (
