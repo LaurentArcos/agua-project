@@ -15,7 +15,7 @@ export default function LoginPage() {
         <div className="mb-6 flex flex-col items-center gap-1 text-center">
           <span className="text-3xl">💧</span>
           <h1 className="text-lg font-bold text-slate-900">Accès protégé</h1>
-          <p className="text-sm text-slate-500">Saisis ton code à 8 chiffres.</p>
+          <p className="text-sm text-slate-500">Entrez le mot de passe</p>
         </div>
 
         <form action={formAction} className="flex flex-col gap-4">
