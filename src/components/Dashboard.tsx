@@ -6,6 +6,7 @@ import type { Thresholds } from "@/lib/levels";
 import KpiCards from "./KpiCards";
 import EntryForm from "./EntryForm";
 import ConsumptionChart from "./ConsumptionChart";
+import { logoutAction } from "@/app/login/actions";
 
 interface Props {
   readings: Reading[];
@@ -36,9 +37,19 @@ export default function Dashboard({ readings, stats, thresholds }: Props) {
         <ConsumptionChart readings={readings} thresholds={thresholds} />
       </section>
 
-      <footer className="pb-4 text-center text-xs text-slate-400">
-        {readings.length} saisie{readings.length > 1 ? "s" : ""} enregistrée
-        {readings.length > 1 ? "s" : ""}
+      <footer className="flex flex-col items-center gap-3 pb-4 text-center text-xs text-slate-400">
+        <span>
+          {readings.length} saisie{readings.length > 1 ? "s" : ""} enregistrée
+          {readings.length > 1 ? "s" : ""}
+        </span>
+        <form action={logoutAction}>
+          <button
+            type="submit"
+            className="cursor-pointer rounded-full px-3 py-1 text-slate-400 underline-offset-2 transition-colors hover:text-slate-600 hover:underline"
+          >
+            Se déconnecter
+          </button>
+        </form>
       </footer>
     </div>
   );

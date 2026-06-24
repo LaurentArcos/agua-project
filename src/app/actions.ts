@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { appendReading, getLastReading } from "@/lib/google-sheets";
+import { appendReading, getLastReading } from "@/lib/readings";
 import { config } from "@/lib/config";
 import { isoToDdmmyyyy, todayIso, diffDaysIso } from "@/lib/date";
 
@@ -96,7 +96,7 @@ export async function addReadingAction(
     const detail = err instanceof Error ? err.message : String(err);
     return {
       ok: false,
-      message: `Erreur lors de l'écriture dans Google Sheets : ${detail}`,
+      message: `Erreur lors de l'écriture dans Supabase : ${detail}`,
     };
   }
 }

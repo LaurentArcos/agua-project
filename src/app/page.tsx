@@ -1,5 +1,5 @@
 import Dashboard from "@/components/Dashboard";
-import { getAllReadings } from "@/lib/google-sheets";
+import { getAllReadings } from "@/lib/readings";
 import { computeStats } from "@/lib/aggregate";
 import { config } from "@/lib/config";
 
@@ -39,9 +39,11 @@ function SetupError({ message }: { message: string }) {
           ⚙️ Configuration requise
         </h1>
         <p className="mb-4 text-sm text-slate-600">
-          Impossible de lire le Google Sheet. Vérifie ton fichier{" "}
-          <code className="rounded bg-slate-100 px-1">.env</code> et le partage du
-          document avec le compte de service.
+          Impossible de lire la base Supabase. Vérifie tes variables{" "}
+          <code className="rounded bg-slate-100 px-1">SUPABASE_URL</code> et{" "}
+          <code className="rounded bg-slate-100 px-1">SUPABASE_SERVICE_ROLE_KEY</code>{" "}
+          (fichier <code className="rounded bg-slate-100 px-1">.env</code> ou
+          variables Vercel).
         </p>
         <pre className="overflow-x-auto rounded-xl bg-slate-900 p-3 text-xs text-red-300">
           {message}
