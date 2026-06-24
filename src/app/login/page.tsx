@@ -19,7 +19,7 @@ function shuffle(arr: number[]): number[] {
 
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState("");git st
   // Ordre stable au 1er rendu (SSR) puis mélangé côté client (évite tout
   // décalage d'hydratation).
   const [keys, setKeys] = useState<number[]>(DIGITS);
